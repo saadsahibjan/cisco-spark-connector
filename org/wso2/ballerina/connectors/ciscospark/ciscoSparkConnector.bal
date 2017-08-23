@@ -24,7 +24,7 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         return response;
     }
     
-    action updateTeam(string teamId, string teamName) {
+    action updateTeam(string teamId, string teamName) (message) {
         message request = {};
         
         string updateTeamPath = "/teams/" + teamId;
@@ -33,11 +33,11 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         messages:setJsonPayload(request, updateTeamPayload);
         messages:setHeader(request, "Content-Type", "application/json");
         
-        message response = ciscoSparkEP.put(updateTeamPayload, request);
+        message response = ciscoSparkEP.put(updateTeamPath, request);
         return response;
     }
     
-    action deleteTeam(string teamId) {
+    action deleteTeam(string teamId) (message) {
         message request = {};
         
         string deleteTeamPath = "/teams/" + teamId;
@@ -46,7 +46,7 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         return response;
     }
     
-    action getTeam(string teamId) {
+    action getTeam(string teamId) (message) {
         message request = {};
         
         string getTeamPath = "/teams/" + teamId;
@@ -55,7 +55,7 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         return response;
     }
     
-    action getAllTeams(int limit) {
+    action getAllTeams(int limit) (message) {
         message request = {};
         
         string getAllTeamPath = "/teams";
