@@ -44,4 +44,26 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         message response = ciscoSparkEP.delete(deleteTeamPath, request);
         return response;
     }
+    
+    action getTeam(string teamId) {
+        message request = {};
+        
+        string getTeamPath = "/teams/" + teamId;
+        
+        message response = ciscoSparkEP.get(deleteTeamPath, request);
+        return response;
+    }
+    
+    action getAllTeams(int limit) {
+        message request = {};
+        
+        string getTeamPath = "/teams";
+        
+        if (limit != 0) {
+            getTeamPath = "?max=" + limit;
+        }
+        
+        message response = ciscoSparkEP.get(getTeamPath, request);
+        return response;
+    }
 }
