@@ -9,4 +9,18 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
     
     oauth2:ClientConnector ciscoSparkEP = create oauth2:ClientConnector(baseUrl, accessToken, clientId,
                                                                 clientSecret, refreshToken, refreshTokenEP);
+
+    action createTeam(string teamName) (message) {
+        message request = {};
+        
+        string createTeamPath = "/teams";
+        json createTeamPayload = {"name": teamName};
+        
+        messages:setJsonPayload(request, createTeamPayload);
+        messages:setHeader(request, "Content-Type", "application/json");
+        
+        message response = ciscoSparkEP.post(createTeamPath, request);
+        
+        return response;
+    }
 }
