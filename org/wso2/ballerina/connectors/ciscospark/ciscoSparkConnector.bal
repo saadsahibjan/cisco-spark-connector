@@ -23,4 +23,18 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         
         return response;
     }
+    
+    action updateTeam(string teamId, string teamName) {
+        message request = {};
+        
+        string updateTeamPath = "/teams/" + teamId;
+        json updateTeamPayload = {"name": teamName};
+        
+        messages:setJsonPayload(request, createTeamPayload);
+        messages:setHeader(request, "Content-Type", "application/json");
+        
+        message response = ciscoSparkEP.post(createTeamPath, request);
+        
+        return response;
+    }
 }
