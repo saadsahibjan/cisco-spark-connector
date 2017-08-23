@@ -1,6 +1,7 @@
 package org.wso2.ballerina.connectors.ciscospark;
 
 import org.wso2.ballerina.connectors.oauth2;
+import ballerina.lang.messages;
 
 connector ClientConnector (string accessToken, string refreshToken, string clientId, string clientSecret) {
     
@@ -50,20 +51,20 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         
         string getTeamPath = "/teams/" + teamId;
         
-        message response = ciscoSparkEP.get(deleteTeamPath, request);
+        message response = ciscoSparkEP.get(getTeamPath, request);
         return response;
     }
     
     action getAllTeams(int limit) {
         message request = {};
         
-        string getTeamPath = "/teams";
+        string getAllTeamPath = "/teams";
         
         if (limit != 0) {
-            getTeamPath = "?max=" + limit;
+            getAllTeamPath = "?max=" + limit;
         }
         
-        message response = ciscoSparkEP.get(getTeamPath, request);
+        message response = ciscoSparkEP.get(getAllTeamPath, request);
         return response;
     }
 }
