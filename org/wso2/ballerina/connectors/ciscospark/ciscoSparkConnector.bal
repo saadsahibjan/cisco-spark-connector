@@ -20,7 +20,6 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         messages:setHeader(request, "Content-Type", "application/json");
         
         message response = ciscoSparkEP.post(createTeamPath, request);
-        
         return response;
     }
     
@@ -30,11 +29,19 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         string updateTeamPath = "/teams/" + teamId;
         json updateTeamPayload = {"name": teamName};
         
-        messages:setJsonPayload(request, createTeamPayload);
+        messages:setJsonPayload(request, updateTeamPayload);
         messages:setHeader(request, "Content-Type", "application/json");
         
-        message response = ciscoSparkEP.post(createTeamPath, request);
+        message response = ciscoSparkEP.put(updateTeamPayload, request);
+        return response;
+    }
+    
+    action deleteTeam(string teamId) {
+        message request = {};
         
+        string deleteTeamPath = "/teams/" + teamId;
+        
+        message response = ciscoSparkEP.delete(deleteTeamPath, request);
         return response;
     }
 }
