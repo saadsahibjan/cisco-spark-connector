@@ -3,6 +3,7 @@ package samples.ciscospark;
 import org.wso2.ballerina.connectors.ciscospark;
 
 import ballerina.lang.system;
+import ballerina.lang.messages;
 import ballerina.lang.jsons;
 import ballerina.net.http;
 
@@ -21,7 +22,7 @@ function main (string[] args) {
         return;
     }
     
-    string teamId = jsons:getString(createTeamJSONRespone, "$.id");
+    string teamId = jsons:toString(createTeamJSONRespone.id);
     message getTeamResponse = ciscoSpark.getTeam(teamId);
     json getTeamJSONResponse = messages:getJsonPayload(getTeamResponse);
     system:println(jsons:toString(getTeamJSONResponse));
