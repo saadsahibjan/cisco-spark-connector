@@ -61,9 +61,9 @@ connector ClientConnector (string accessToken, string refreshToken, string clien
         string getAllTeamPath = "/teams";
         
         if (limit != 0) {
-            getAllTeamPath = "?max=" + limit;
+            getAllTeamPath = "/teams?max=" + limit;
         }
-        
+
         message response = ciscoSparkEP.get(getAllTeamPath, request);
         return response;
     }
