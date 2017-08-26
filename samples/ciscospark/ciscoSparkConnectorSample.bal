@@ -9,11 +9,7 @@ import ballerina.net.http;
 
 function main (string[] args) {
     string accessToken = "access-token";
-    string refreshToken = "refresh-token";
-    string clientId = "client-id";
-    string clientSecret = "client-secret";
-    ciscospark:ClientConnector ciscoSpark = create ciscospark:ClientConnector(accessToken, refreshToken, 
-                                                                                        clientId, clientSecret);
+    ciscospark:ClientConnector ciscoSpark = create ciscospark:ClientConnector(accessToken);
     message createTeamRespone = ciscoSpark.createTeam("DevX");
     json createTeamJSONRespone = messages:getJsonPayload(createTeamRespone);
     

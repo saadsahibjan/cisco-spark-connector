@@ -3,13 +3,12 @@ package org.wso2.ballerina.connectors.ciscospark;
 import org.wso2.ballerina.connectors.oauth2;
 import ballerina.lang.messages;
 
-connector ClientConnector (string accessToken, string refreshToken, string clientId, string clientSecret) {
+connector ClientConnector (string accessToken) {
     
     string baseUrl = "https://api.ciscospark.com/v1";
-    string refreshTokenEP = "https://api.ciscospark.com/v1/access_token";
     
-    oauth2:ClientConnector ciscoSparkEP = create oauth2:ClientConnector(baseUrl, accessToken, clientId,
-                                                                clientSecret, refreshToken, refreshTokenEP);
+    oauth2:ClientConnector ciscoSparkEP = create oauth2:ClientConnector(baseUrl, accessToken, "null",
+                                                                                "null", "null", "null");
 
     action createTeam(string teamName) (message) {
         message request = {};
